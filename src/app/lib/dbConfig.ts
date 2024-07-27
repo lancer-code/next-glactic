@@ -22,3 +22,5 @@ async function dbConnect(connection: ConnectionObj): Promise<void> {
     process.exit(1);
   }
 }
+
+export default dbConnect;
