@@ -4,13 +4,13 @@ import { ApiResponse } from "@/app/types/ApiResponse";
 
 const resend = Resend;
 
-export async function POST(name: string, code: string): Promise<ApiResponse> {
+export async function sendVerificationEmail(name: string, code: string , email: string): Promise<ApiResponse> {
   try {
     await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["slacks.425@gmail.com"],
       subject: `VerifiCation Code for ${name}`,
-      react: verificationEmailTemplate({ firstName: name, code }),
+      react: verificationEmailTemplate({ firstName: name, code, email }),
     });
 
     return { success: true, message: "Verfication Email Sended Successfully" };

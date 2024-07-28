@@ -4,7 +4,9 @@ type ConnectionObj = {
   isConnected?: Number;
 };
 
-async function dbConnect(connection: ConnectionObj): Promise<void> {
+const connection : ConnectionObj = {}
+
+async function dbConnect(): Promise<void> {
   if (connection.isConnected) {
     console.log("DB is Already Connected!");
     return;
