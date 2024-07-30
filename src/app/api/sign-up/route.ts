@@ -10,12 +10,21 @@ export async function POST(request: Request) {
     const { username, email, password } = await request.json(); //Extracting Data from the Comming Request from sign up Component
 
     const existingUserVerifedByUsername = await UserModel.findOne({
-      //Checking User By Username and is verified
+      //Checking User By Username
       username,
-      isVerified: true,
     });
 
     if (existingUserVerifedByUsername) {
+      if (!existingUserVerifedByUsername?.isVerified) {
+        return Response.json(
+          {
+            success: false,
+            message: "Username Already Exists, But please Verify your account",
+          },
+          { status: 400 }
+        );
+      }
+
       return Response.json(
         { success: false, message: "Username Already Exists!" },
         { status: 400 }
@@ -28,9 +37,17 @@ export async function POST(request: Request) {
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     if (existingUserByEmail) {
-
+      if (!existingUserByEmail.isVerified) {
+        return Response.json(
+          {
+            success: false,
+            message: "Email Already Exists, But Please verify your Acount",
+          },
+          { status: 400 }
+        );
+      }
       //Check if eamil is Verfied
-      if (existingUserByEmail.isVerifed) {      
+      if (existingUserByEmail.isVerified) {
         return Response.json(
           {
             success: false,
@@ -39,8 +56,6 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       } else {
-
-        
         const hashPass = await bcrypt.hash(password, 10);
         existingUserByEmail.password = hashPass;
         (existingUserByEmail.verifyCode = verifyCode),
@@ -48,7 +63,7 @@ export async function POST(request: Request) {
             Date.now() + 3600000
           ));
 
-        await existingUserByEmail.save()
+        await existingUserByEmail.save();
       }
     } else {
       //If not Found, Create the New User in DB
@@ -100,7 +115,7 @@ export async function POST(request: Request) {
     console.log("Failed to Register User ", error);
 
     return Response.json(
-      { success: false, message: "Failed to Register User" },
+      { success: false, message: `Failed to Register User` },
       { status: 500 }
     );
   }
