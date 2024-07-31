@@ -4,8 +4,10 @@ import { ApiResponse } from "@/app/types/ApiResponse";
 
 const resend = Resend;
 
+
+
 export async function sendVerificationEmail(
-  name: string,
+  username: string,
   code: string,
   email: string
 ): Promise<ApiResponse> {
@@ -13,8 +15,8 @@ export async function sendVerificationEmail(
     await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: [email],
-      subject: `VerifiCation Code for ${name}`,
-      react: verificationEmailTemplate({ firstName: name, code, email }),
+      subject: `VerifiCation Code for ${username}`,
+      react: verificationEmailTemplate({ username, code, email }),
     });
 
     return { success: true, message: "Verfication Email Sended Successfully" };

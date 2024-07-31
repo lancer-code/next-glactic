@@ -1,17 +1,18 @@
 import * as React from 'react';
 
-interface EmailTemplateProps {
-  firstName: string,
+export interface EmailTemplateProps {
+  username: string,
   code: string,
+  email: string
 }
 
 export const verificationEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  firstName,
+  username,
   code,
   email
 }) => (
   <div>
-    <h1>Welcome, {firstName}!</h1>
+    <h1>Welcome, {username}!</h1>
     <p>Thanks for sign up. Please Verfify your account {email} with the folwoing code</p>
     <h3 className='font-bold text-lg'>{code}</h3>
   </div>

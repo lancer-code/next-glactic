@@ -103,7 +103,7 @@ export async function POST(request: Request) {
 
     const EmailResponse = await sendVerificationEmail(
       username,
-      verifyCode,
+      code=verifyCode,
       email
     );
 
