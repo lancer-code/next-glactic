@@ -8,7 +8,7 @@ interface EmailTemplateProps {
 export const verificationEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
   code,
-  email,
+  email
 }) => (
   <div>
     <h1>Welcome, {firstName}!</h1>

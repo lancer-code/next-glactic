@@ -1,6 +1,7 @@
 import { sendVerificationEmail } from "@/app/helpers/sendVerificationEmail";
 import dbConnect from "@/app/lib/dbConfig";
 import UserModel from "@/app/models/Users";
+import { usernameValidation } from "@/app/schemas/SignUpSchema";
 import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
@@ -9,6 +10,18 @@ export async function POST(request: Request) {
   try {
     const { username, email, password } = await request.json(); //Extracting Data from the Comming Request from sign up Component
 
+    const checkUsername = usernameValidation.safeParse(username)
+
+    if (!checkUsername.success) {
+      return Response.json(
+        {
+          success: false,
+          message: "Enter a Valid Username",
+        },
+        { status: 400 }
+      );
+    }
+   
     const existingUserVerifedByUsername = await UserModel.findOne({
       //Checking User By Username
       username,
@@ -19,7 +32,7 @@ export async function POST(request: Request) {
         return Response.json(
           {
             success: false,
-            message: "Username Already Exists, But please Verify your account",
+            message: "User already Exists, But please Verify your account",
           },
           { status: 400 }
         );
@@ -41,7 +54,7 @@ export async function POST(request: Request) {
         return Response.json(
           {
             success: false,
-            message: "Email Already Exists, But Please verify your Acount",
+            message: "User already Exists, But Please verify your Acount",
           },
           { status: 400 }
         );
@@ -93,6 +106,8 @@ export async function POST(request: Request) {
       verifyCode,
       email
     );
+
+    console.log(EmailResponse)
 
     if (!EmailResponse.success) {
       return Response.json(

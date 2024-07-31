@@ -1,7 +1,7 @@
 import dbConnect from "@/app/lib/dbConfig";
 import UserModel from "@/app/models/Users";
-import { usernameValidation } from "@/app/schemas/SignUpSchema";
-import { z } from "zod";
+import { SignUpSchema, usernameValidation } from "@/app/schemas/SignUpSchema";
+
 
 export async function GET(request: Request) {
 
@@ -14,6 +14,8 @@ export async function GET(request: Request) {
   //Check if Username is Valid 
 
   const result = usernameValidation.safeParse(username);
+
+
 
   console.log(result)
   console.log(username)
