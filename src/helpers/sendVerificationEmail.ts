@@ -1,6 +1,6 @@
-import { verificationEmailTemplate } from "@/app/components/email/VerificationEmail";
-import { Resend } from "@/app/lib/resend"; //Import Api Key from lib
-import { ApiResponse } from "@/app/types/ApiResponse";
+import { verificationEmailTemplate } from "@/components/email/VerificationEmail";
+import { Resend } from "@/lib/resend"; //Import Api Key from lib
+import { ApiResponse } from "@/types/ApiResponse";
 
 const resend = Resend;
 

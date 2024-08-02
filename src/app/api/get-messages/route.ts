@@ -1,7 +1,7 @@
-import dbConnect from "@/app/lib/dbConfig";
+import dbConnect from "@/lib/dbConfig";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import UserModel from "@/app/models/Users";
+import UserModel from "@/models/Users";
 import mongoose from "mongoose";
 
 export async function GET(request: Request) {

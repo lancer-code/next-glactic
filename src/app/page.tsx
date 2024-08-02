@@ -1,5 +1,5 @@
 import Image from "next/image";
-import dbConnect from "./lib/dbConfig";
+import dbConnect from "../lib/dbConfig";
 
 export default async function Home() {
   await dbConnect()

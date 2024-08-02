@@ -1,6 +1,6 @@
-import dbConnect from "@/app/lib/dbConfig";
-import UserModel from "@/app/models/Users";
-import { SignUpSchema, usernameValidation } from "@/app/schemas/SignUpSchema";
+import dbConnect from "@/lib/dbConfig";
+import UserModel from "@/models/Users";
+import { SignUpSchema, usernameValidation } from "@/schemas/SignUpSchema";
 
 
 export async function GET(request: Request) {

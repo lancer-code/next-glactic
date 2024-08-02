@@ -1,5 +1,5 @@
-import { sendVerificationEmail } from "@/app/helpers/sendVerificationEmail";
-import UserModel from "@/app/models/Users";
+import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+import UserModel from "@/models/Users";
 import { z } from "zod";
 
 export async function POST(request: Request) {

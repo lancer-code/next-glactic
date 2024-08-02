@@ -1,7 +1,7 @@
-import { sendVerificationEmail } from "@/app/helpers/sendVerificationEmail";
-import dbConnect from "@/app/lib/dbConfig";
-import UserModel from "@/app/models/Users";
-import { usernameValidation } from "@/app/schemas/SignUpSchema";
+import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+import dbConnect from "@/lib/dbConfig";
+import UserModel from "@/models/Users";
+import { usernameValidation } from "@/schemas/SignUpSchema";
 import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
