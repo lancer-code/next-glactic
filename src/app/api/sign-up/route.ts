@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const { username, email, password } = await request.json(); //Extracting Data from the Comming Request from sign up Component
 
     const checkUsername = usernameValidation.safeParse(username)
-
+  
     if (!checkUsername.success) {
       return Response.json(
         {
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       //Checking User By Username
       username,
     });
-
+ 
     if (existingUserVerifedByUsername) {
       if (!existingUserVerifedByUsername?.isVerified) {
         return Response.json(
@@ -52,6 +52,7 @@ export async function POST(request: Request) {
     if (existingUserByEmail) {
       if (!existingUserByEmail.isVerified) {
         return Response.json(
+          
           {
             success: false,
             message: "User already Exists, But Please verify your Acount",
@@ -103,7 +104,7 @@ export async function POST(request: Request) {
 
     const EmailResponse = await sendVerificationEmail(
       username,
-      code=verifyCode,
+      verifyCode,
       email
     );
 
@@ -135,3 +136,6 @@ export async function POST(request: Request) {
     );
   }
 }
+
+
+

@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: false,
-        message: "Username Does not Exist Special Charaters",
+        message: "Username does not Exist Special Charaters",
       },
       { status: 400 }
     );
@@ -38,8 +38,7 @@ export async function GET(request: Request) {
      
       });
 
-      console.log("Resurlkt ", result)
-
+      
       if (!result?.isVerified) {
         return Response.json(
           {
@@ -54,7 +53,7 @@ export async function GET(request: Request) {
         return Response.json(
           {
             success: false,
-            message: "Username already Exists",
+            message: "username taken",
           },
           { status: 400 }
         );
@@ -64,7 +63,7 @@ export async function GET(request: Request) {
         return Response.json(
           {
             success: true,
-            message: "Username is Uniqe",
+            message: "username available",
           },
           { status: 200 }
         );
@@ -78,7 +77,7 @@ export async function GET(request: Request) {
           success: false,
           message: "Error Checking Username Uniqe",
         },
-        { status: 400 }
+        { status: 500 }
       );
     }
   }

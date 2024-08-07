@@ -63,6 +63,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     //Modefying Jwt, puting user data in token, and token data in session, so that we don't need to reach DB for user date every time
     //when we need to use user information in other areas of App
+   
     async session({ session, token }) {
       console.log("Session Call BAck")
       if (token) {
@@ -73,6 +74,8 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+
+   
     async jwt({ token, user }) {
       console.log("JWT Call BAck")
       if (user) {
