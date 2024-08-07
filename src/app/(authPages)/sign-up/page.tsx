@@ -8,7 +8,7 @@ import { z } from "zod";
 import axios, { AxiosError } from "axios";
 import { useDebounceCallback } from "usehooks-ts";
 import { ApiResponse } from "@/types/ApiResponse";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import {
   Form,
@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Link from "next/link";
 
 function signUp() {
   const [isSubmitting, setisSubmitting] = useState(false);
@@ -29,6 +30,8 @@ function signUp() {
   const [Username, setUsername] = useState("");
   const [CheckUsername, setCheckUsername] = useState("");
   const [ShowPassword, setShowPassword] = useState(false);
+
+  const {toast} = useToast()
 
   const router = useRouter();
   const debounceUsername = useDebounceCallback(setUsername, 500);
@@ -147,7 +150,7 @@ function signUp() {
                       <FormControl>
                         <>
                           <Input type={ShowPassword ? "text":"password"} {...field} />
-                          <Button className="relative left-[16rem] md:left-[22.2rem] bottom-[3rem]" onClick={()=>{ShowPassword ? setShowPassword(false): setShowPassword(true)}}  variant={"outline"}>{ShowPassword ? (<EyeOff/>):(<Eye/>)}</Button>
+                          <Button type="button" className="relative left-[16rem] md:left-[22.2rem] bottom-[3rem]" onClick={()=>{ShowPassword ? setShowPassword(false): setShowPassword(true)}}  variant={"outline"}>{ShowPassword ? (<EyeOff/>):(<Eye/>)}</Button>
                         </>
                       </FormControl>
                       <FormMessage />
@@ -155,7 +158,7 @@ function signUp() {
                   )}
                 />
                 <Button
-                  className="w-full "
+                  className="w-full relative -top-7"
                   type="submit"
                   disabled={isSubmitting}
                 >
@@ -169,6 +172,7 @@ function signUp() {
             </Form>
             
           </div>
+          <p className="font-medium">Already have Account? <Link className="text-blue-600 font-semibold hover:underline" href={"/sign-in"}>Sign In</Link></p>
         </div>
       </div>
     </>
